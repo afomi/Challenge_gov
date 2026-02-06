@@ -3,10 +3,6 @@ import "/node_modules/uswds/dist/scss/uswds.scss";
 import "/node_modules/uswds/dist/js/uswds.js";
 
 
-// Bootstrap
-//import "bootstrap/dist/css/bootstrap.css";
-//import "bootstrap/dist/js/bootstrap.js";
-
 // Admin LTE
 //import "admin-lte/dist/css/adminlte.css";
 //import "admin-lte/dist/js/adminlte.js";
@@ -14,10 +10,6 @@ import "/node_modules/uswds/dist/js/uswds.js";
 // Rich Text Editor
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
-
-// Import dependencies
-// import "@fortawesome/fontawesome-free/js/all.js";
-// import "@fortawesome/fontawesome-free/css/all.css";
 
 import jquery from  "jquery";
 import "popper.js";
