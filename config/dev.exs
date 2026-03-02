@@ -111,10 +111,6 @@ config :waffle,
   storage: Waffle.Storage.Local,
   storage_dir_prefix: Path.expand("../priv/waffle/uploads", __DIR__)
 
-config :ueberauth, Ueberauth.Strategy.Github.OAuth,
-  client_id: System.get_env("GITHUB_CLIENT_ID"),
-  client_secret: System.get_env("GITHUB_CLIENT_SECRET")
-
 if File.exists?("config/dev.local.exs") do
   import_config("dev.local.exs")
 end
