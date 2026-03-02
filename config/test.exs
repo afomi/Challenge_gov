@@ -66,6 +66,10 @@ config :wallaby,
     # path: "/usr/bin/chromedriver"
   ]
 
+config :ueberauth, Ueberauth.Strategy.Github.OAuth,
+  client_id: "test_client_id",
+  client_secret: "test_client_secret"
+
 if File.exists?("config/test.local.exs") do
   import_config("test.local.exs")
 end

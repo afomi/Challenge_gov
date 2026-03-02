@@ -12,12 +12,6 @@ defmodule ChallengeGov.MixProject do
       aliases: aliases(),
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: [
-        coveralls: :test,
-        "coveralls.detail": :test,
-        "coveralls.post": :test,
-        "coveralls.html": :test
-      ],
       # Ensure the priv/certs directory is included in the release
       releases: [
         challenge_gov: [
@@ -27,6 +21,17 @@ defmodule ChallengeGov.MixProject do
           extra_files: ["priv/certs"],
           overlay_directory: "rel/overlays"
         ]
+      ]
+    ]
+  end
+
+  def cli do
+    [
+      preferred_envs: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
       ]
     ]
   end
@@ -93,6 +98,8 @@ defmodule ChallengeGov.MixProject do
       {:stein_storage, "~> 0.1"},
       {:sweet_xml, "~> 0.7.0"},
       {:tesla, "~> 1.12.1"},
+      {:ueberauth, "~> 0.10"},
+      {:ueberauth_github, "~> 0.8"},
       {:text_delta, "~> 1.1.0"},
       {:timex, "~> 3.7.11"},
       {:waffle, "~> 1.1.5"},

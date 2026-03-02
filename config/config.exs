@@ -32,6 +32,11 @@ config :bamboo, :json_library, Jason
 
 config :tesla, :adapter, Tesla.Adapter.Hackney
 
+config :ueberauth, Ueberauth,
+  providers: [
+    github: {Ueberauth.Strategy.Github, [default_scope: "user:email"]}
+  ]
+
 config :challenge_gov, :recaptcha, module: ChallengeGov.Recaptcha.Implementation
 config :challenge_gov, :gov_delivery, module: ChallengeGov.GovDelivery.Implementation
 

@@ -95,16 +95,24 @@ defmodule Web.SessionController do
 
   @empty_jwt_token ""
   def delete(conn = %{assigns: %{current_user: user}}, _params) do
-    %{
-      client_id: client_id
-    } = oidc_config()
-
     Accounts.update_active_session(user, false, @empty_jwt_token)
     log_session_duration(conn, user)
 
-    conn
-    |> clear_session()
-    |> redirect(external: LoginGov.logout_uri(client_id))
+    if github_only_user?(user) do
+      conn
+      |> clear_session()
+      |> redirect(to: Routes.session_path(conn, :new))
+    else
+      %{client_id: client_id} = oidc_config()
+
+      conn
+      |> clear_session()
+      |> redirect(external: LoginGov.logout_uri(client_id))
+    end
+  end
+
+  defp github_only_user?(user) do
+    user.github_uid != nil
   end
 
   @doc """
