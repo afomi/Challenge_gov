@@ -8,7 +8,33 @@
         to monitoring. Individuals found performing unauthorized activities are
         subject to disciplinary action including criminal prosecution.
       </p>
-        <%= button("Accept and Sign-in", to: Routes.session_path(@conn, :create), method: :post, class: "usa-button center-btn") %>
+      <div class="sign-in-buttons">
+        <%= if Web.SessionView.login_gov_enabled?() do %>
+          <%= button(
+            "Sign in with Login.gov",
+            to: Routes.session_path(@conn, :create),
+            method: :post,
+            class: "usa-button center-btn"
+          ) %>
+        <% else %>
+          <button
+            class="usa-button usa-button--disabled center-btn"
+            disabled
+          >Sign in with Login.gov</button>
+        <% end %>
+        <%= if Web.SessionView.github_enabled?() do %>
+          <%= link(
+            "Sign in with GitHub",
+            to: Routes.auth_path(@conn, :request),
+            class: "usa-button center-btn"
+          ) %>
+        <% else %>
+          <button
+            class="usa-button usa-button--disabled center-btn"
+            disabled
+          >Sign in with GitHub</button>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

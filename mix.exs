@@ -93,6 +93,8 @@ defmodule ChallengeGov.MixProject do
       {:stein_storage, "~> 0.1"},
       {:sweet_xml, "~> 0.7.0"},
       {:tesla, "~> 1.12.1"},
+      {:ueberauth, "~> 0.10"},
+      {:ueberauth_github, "~> 0.8"},
       {:text_delta, "~> 1.1.0"},
       {:timex, "~> 3.7.11"},
       {:waffle, "~> 1.1.5"},

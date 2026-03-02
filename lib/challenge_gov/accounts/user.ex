@@ -66,6 +66,7 @@ defmodule ChallengeGov.Accounts.User do
     field(:password_confirmation, :string, virtual: true)
     field(:token, Ecto.UUID)
     field(:jwt_token, :string)
+    field(:github_uid, :string)
 
     field(:email_verification_token, :string)
     field(:email_verified_at, :utc_datetime)
@@ -107,7 +108,8 @@ defmodule ChallengeGov.Accounts.User do
       :agency_id,
       :status,
       :active_session,
-      :renewal_request
+      :renewal_request,
+      :github_uid
     ])
     |> validate_required([:email])
     |> validate_format(:email, ~r/.+@.+\..+/)

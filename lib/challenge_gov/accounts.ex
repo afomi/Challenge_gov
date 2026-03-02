@@ -444,6 +444,58 @@ defmodule ChallengeGov.Accounts do
     end
   end
 
+  @doc """
+  Parse GitHub OAuth data into our system
+  """
+  def map_from_github(github_uid, email, remote_ip) do
+    case get_by_github_uid(github_uid) do
+      {:ok, user} ->
+        update_active_session(user, true, "")
+
+        SecurityLogs.track(%{
+          originator_id: user.id,
+          originator_role: user.role,
+          originator_identifier: user.email,
+          originator_remote_ip: remote_ip,
+          action: "accessed_site"
+        })
+
+        {:ok, user}
+
+      {:error, :not_found} ->
+        case get_by_email(email) do
+          {:ok, user} ->
+            __MODULE__.update(user, %{github_uid: github_uid})
+
+          {:error, :not_found} ->
+            create(remote_ip, %{
+              email: email,
+              role: "solver",
+              token: UUID.uuid4(),
+              github_uid: github_uid,
+              terms_of_use: nil,
+              privacy_guidelines: nil,
+              status: "active"
+            })
+        end
+    end
+  end
+
+  @doc """
+  Find a user by GitHub UID
+  """
+  def get_by_github_uid(nil), do: {:error, :not_found}
+
+  def get_by_github_uid(github_uid) do
+    case Repo.get_by(User, github_uid: github_uid) do
+      nil ->
+        {:error, :not_found}
+
+      user ->
+        {:ok, user}
+    end
+  end
+
   defp default_role_and_status_for_email(email) do
     case Security.default_challenge_manager?(email) do
       true ->

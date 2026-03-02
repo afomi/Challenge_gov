@@ -54,6 +54,8 @@ defmodule Web.Router do
 
     resources("/sign-in", SessionController, only: [:new, :create], singleton: true)
     get("/auth/result", SessionController, :result)
+    get("/auth/github", AuthController, :request)
+    get("/auth/github/callback", AuthController, :callback)
   end
 
   scope "/", Web do
