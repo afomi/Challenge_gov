@@ -43,7 +43,7 @@
             <nav aria-label="Side navigation,">
             <ul class="usa-sidenav">
               <li class="usa-sidenav__item">
-                <a href="https://www.challenge.gov" class="brand-link">
+                <a href="/" class="brand-link">
                   <span class="padding-left-1">Challenge.Gov</span>
                   <svg class="usa-icon usa-challenge-menu float-left" aria-hidden="true" focusable="false" role="img">
                     <use xlink:href="/assets/img/sprite.svg#home"></use>
